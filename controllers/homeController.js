@@ -25,3 +25,27 @@ exports.resDonate = (req, res) => {
 exports.resEvents = (req, res) => {
 	res.render("events");
 };
+
+exports.resLogin = (req, res) => {
+	res.render("login");
+}
+
+exports.resNews = (req, res) => {
+	res.render("news");
+}
+
+exports.resPet = (req, res) => {
+	res.render("pet");
+}
+
+exports.resQuestions = (req, res) => {
+	res.render("questions");
+}
+
+exports.resSignup = (req, res) => {
+	res.render("signup");
+}
+
+exports.resVolunteer = (req, res) => {
+	res.render("volunteer");
+}
