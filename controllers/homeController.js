@@ -49,3 +49,7 @@ exports.resSignup = (req, res) => {
 exports.resVolunteer = (req, res) => {
 	res.render("volunteer");
 }
+
+exports.resAddPet = (req, res) => {
+	res.render("add-pet");
+}
