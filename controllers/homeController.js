@@ -1,55 +1,58 @@
-exports.resHome = (req, res) => {
-	res.render("index");
-};
-// exports.resPetlist = (req, res) => {
-// 	res.render("petlist");
-// };
-exports.resAbout = (req, res) => {
-	res.render("about/index");
-};
-exports.resAccount = (req, res) => {
-	res.render("users/account");
-};
-exports.resAddEvent = (req, res) => {
-	res.render("events/add-event");
-};
-exports.resContactUs = (req, res) => {
-	res.render("about/contact-us");
-};
-exports.resDiscussions = (req, res) => {
-	res.render("discussions/index");
-};
-exports.resDonate = (req, res) => {
-	res.render("donate");
-};
-exports.resEvents = (req, res) => {
-	res.render("events/index");
-};
+module.exports = {
+  	logRequestPaths: (req, res, next) => {
+	    console.log(`request made to: ${req.url}\n${JSON.stringify(req.body)}`);
+	    next();
+	},
 
-exports.resLogin = (req, res) => {
-	res.render("users/login");
-}
+	resHome: (req, res) => {
+		res.render("index");
+	},
 
-exports.resNews = (req, res) => {
-	res.render("about/news/index");
-}
+	resAbout: (req, res) => {
+		res.render("about/index");
+	},
 
-exports.resPet = (req, res) => {
-	res.render("pets/pet");
-}
+	resAccount: (req, res) => {
+		res.render("users/account");
+	},
 
-exports.resQuestions = (req, res) => {
-	res.render("about/questions");
-}
+	resAddEvent: (req, res) => {
+		res.render("events/add-event");
+	},
 
-exports.resSignup = (req, res) => {
-	res.render("users/signup");
-}
+	resContactUs: (req, res) => {
+		res.render("about/contact-us");
+	},
 
-exports.resVolunteer = (req, res) => {
-	res.render("about/volunteer");
-}
+	resDiscussions: (req, res) => {
+		res.render("discussions/index");
+	},
 
-// exports.resAddPet = (req, res) => {
-// 	res.render("add-pet");
-// }
+	resDonate: (req, res) => {
+		res.render("donate");
+	},
+
+	resEvents: (req, res) => {
+		res.render("events/index");
+	},
+
+	resLogin: (req, res) => {
+		res.render("users/login");
+	},
+
+	resNews: (req, res) => {
+		res.render("about/news/index");
+	},
+
+	resQuestions: (req, res) => {
+		res.render("about/questions");
+	},
+
+	resSignup: (req, res) => {
+		res.render("users/signup");
+	},
+
+	resVolunteer: (req, res) => {
+		res.render("about/volunteer");
+	}
+};

@@ -8,7 +8,6 @@ const port = 3000,
 	mongoose = require("mongoose"),
 	dbconnectionstring = "mongodb+srv://dbAdmin:adminPassword@is-5050-shelter.srhwi.mongodb.net/shelter?retryWrites=true&w=majority";
 
-
 const db = mongoose.connection;
 const router = express.Router();
 const methodOverride = require("method-override");
@@ -27,6 +26,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(layouts);
 app.use(express.static("public"));
+app.use(homeController.logRequestPaths);
 app.use("/", router);
 
 // PAGES
@@ -51,8 +51,7 @@ router.get("/users/login", homeController.resLogin);
 router.get("/users/signup", homeController.resSignup);
 
 // POSTS
-router.post("/pets/create", petController.create, petController.redirectView);
-// app.post("/postPet", petController.savePet);
+router.post("/postPet", petController.savePet, petController.redirectView);
 
 app.use(errorController.logErrors);
 app.use(errorController.respondNoResourceFound);

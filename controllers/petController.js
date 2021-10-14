@@ -34,6 +34,29 @@ module.exports = {
 		res.render("pets/add-pet");
 	},
 
+	savePet: (req, res) => {
+		console.log(req.body);
+		let newPet = new Pet({
+			name: req.body.name,
+			species: req.body.species,
+			breed: req.body.breed,
+			age: req.body.age,
+			gender: req.body.gender,
+			weight: req.body.weight,
+			price: req.body.price,
+			dateAdded: new Date(),
+			description: req.body.description,
+			houseTrained: req.body.houseTrained,
+			image: req.body.image
+		});
+		newPet.save().then(result => {
+			console.log("pet saved");
+			next();
+		}).catch(error => {
+			if (error) res.send(error);
+		});
+    },
+
 	create: (req, res, next) => {
 		let petParams = {
 			name: req.body.name,
@@ -61,7 +84,7 @@ module.exports = {
 
 	redirectView: (req, res, next) => {
 		let redirectPath = res.locals.redirect;
-		if (redirectPath)res.redirect(redirectPath);
+		if (redirectPath) res.redirect(redirectPath);
 		else next();
 	},
 
@@ -131,7 +154,5 @@ module.exports = {
 		});
 	}
 
-	// imgUpload: () => {
-	//
-	// }
+	// TODO: image upload function
 };
