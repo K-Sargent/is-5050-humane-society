@@ -2,58 +2,136 @@
 
 const Pet = require("../models/pet");
 
-// GET PETLIST
-exports.getAllPets = (req, res) => {
-  Pet.find({})
-    .then(pets => {
-      res.render("petlist", {
-        pets: pets
-      });
-    })
-    .catch(error => {
-      console.log(error.message);
-      return [];
-    })
-    .then(() => {
-      console.log("promise complete");
-    });
-};
+module.exports = {
+	index: (req, res, next) => {
+		Pet.find().then(pets => {
+			res.locals.pets = pets;
+			next();
+		}).catch(error => {
+			console.log(`Error fetching pets: ${error.message}`);
+			next(error);
+		});
+	},
 
-exports.getPetPage = (req, res) => {
-  res.render("pet");
-};
+	indexView: (req, res) => {
+		res.render("pets/index");
+	},
 
-exports.deletePet = (req, res) => {
-  let id = req.params.id;
-  Pet.findByIdAndDelete(id)
-  	.then(() => {
-		console.log("Pet Removed");
-		res.redirect("/petlist");
-	})
-	.catch((error) => {console.log(error)});
-};
+	getAllPets: (req, res) => {
+		Pet.find({}).then(pets => {
+			res.render("pets/index", {
+				pets: pets
+			});
+		}).catch(error => {
+			console.log(error.message);
+			return [];
+		}).then(() => {
+			console.log("promise complete");
+		});
+	},
 
-exports.savePet = (req, res) => {
+	new: (req, res) => {
+		res.render("pets/add-pet");
+	},
 
-  let newPet = new Pet({
-	name: req.body.name,
-  	species: req.body.species,
-  	breed: req.body.breed,
-  	age: req.body.age,
-  	gender: req.body.gender,
-  	weight: req.body.weight,
-  	price: req.body.price,
-  	dateAdded: new Date(),
-  	description: req.body.description,
-  	houseTrained: req.body.houseTrained,
-  	image: req.body.image
-  });
+	create: (req, res, next) => {
+		let petParams = {
+			name: req.body.name,
+		  	species: req.body.species,
+		  	breed: req.body.breed,
+		  	age: req.body.age,
+		  	gender: req.body.gender,
+		  	weight: req.body.weight,
+		  	price: req.body.price,
+		  	dateAdded: new Date(),
+		  	description: req.body.description,
+		  	houseTrained: req.body.houseTrained,
+		  	image: req.body.image
+		};
 
-  newPet.save()
-    .then(() => {
-      res.redirect("/petlist");
-    })
-    .catch(error => {
-      res.send(error);
-    });
+		Pet.create(petParams).then(pet => {
+			res.locals.redirect = "/pets";
+			res.locals.pet.pet = pet;
+			next();
+		}).catch(error => {
+			console.log(`Error saving pet: ${error.message}`);
+			next(error);
+		});
+	},
+
+	redirectView: (req, res, next) => {
+		let redirectPath = res.locals.redirect;
+		if (redirectPath)res.redirect(redirectPath);
+		else next();
+	},
+
+	details: (req, res, next) => {
+		let petId = req.params.id;
+		Pet.findById(petId).then(pet => {
+			res.locals.pet = pet;
+			next();
+		}).catch(error => {
+			console.log(`Error fetching pet by ID: ${error.message}`);
+			next(error);
+		});
+	},
+
+	detailView: (req, res) => {
+		res.render("pets/pet");
+	},
+
+	edit: (req, res, next) => {
+		let petId = req.params.id;
+		Pet.findById(petId).then(pet => {
+			res.render("pets/edit", {
+				pet: pet
+			});
+		}).catch(error => {
+			console.log(`Error fetching pet by ID: ${error.message}`);
+			next(error);
+		});
+	},
+
+	update: (req, res, next) => {
+		let petId = req.params.id,
+		petParams = {
+			name: req.body.name,
+			species: req.body.species,
+			breed: req.body.breed,
+			age: req.body.age,
+			gender: req.body.gender,
+			weight: req.body.weight,
+			price: req.body.price,
+			dateAdded: req.body.date,
+			description: req.body.description,
+			houseTrained: req.body.houseTrained,
+			image: req.body.image
+		};
+
+		Pet.findByIdAndUpdate(petId, {
+			$set: petParams
+		}).then(pet => {
+			res.locals.redirect = `/pets/${petId}`;
+			res.locals.pet = pet;
+			next();
+		}).catch(error => {
+			console.log(`Error updating pet by ID: ${error.message}`);
+			next(error);
+		});
+	},
+
+	delete: (req, res, next) => {
+		let petId = req.params.id;
+		Pet.findByIdAndDelete(petId).then(() => {
+			res.locals.redirect = "/pets";
+			next();
+		}).catch(error => {
+			console.log(`Error deleting pet by ID: ${error.message}`);
+			next();
+		});
+	}
+
+	// imgUpload: () => {
+	//
+	// }
 };

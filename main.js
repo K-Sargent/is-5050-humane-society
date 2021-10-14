@@ -8,11 +8,18 @@ const port = 3000,
 	mongoose = require("mongoose"),
 	dbconnectionstring = "mongodb+srv://dbAdmin:adminPassword@is-5050-shelter.srhwi.mongodb.net/shelter?retryWrites=true&w=majority";
 
+
+const db = mongoose.connection;
+const router = express.Router();
+const methodOverride = require("method-override");
+
+router.use(methodOverride("_method", {
+  methods: ["POST", "GET"]
+}));
+
 // DATABASE CONNECTION
-mongoose.connect(dbconnectionstring).then(() => {
-	console.log("Mongoose connected!")})
-		.catch((error) => {
-			console.log("Error: ", error);
+db.once("open", () => {
+  console.log("Successfully connected to MongoDB using Mongoose!");
 });
 
 app.set("view engine", "ejs");
@@ -20,30 +27,32 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(layouts);
 app.use(express.static("public"));
+app.use("/", router);
 
 // PAGES
-app.get("/", homeController.resHome);
-app.get("/index", homeController.resHome);
-app.get("/petlist", homeController.resPetlist);
-app.get("/about", homeController.resAbout);
-app.get("/account", homeController.resAccount);
-app.get("/contact-us", homeController.resContactUs);
-app.get("/discussions", homeController.resDiscussions);
-app.get("/donate", homeController.resDonate);
-app.get("/events", homeController.resEvents);
-app.get("/news", homeController.resNews);
-app.get("/pet", homeController.resPet);
-app.get("/questions", homeController.resQuestions);
-app.get("/volunteer", homeController.resVolunteer);
+router.get("/", homeController.resHome);
+router.get("/index", homeController.resHome);
+router.get("/pets", petController.indexView);
+router.get("/about", homeController.resAbout);
+router.get("/users/account", homeController.resAccount);
+router.get("/about/contact-us", homeController.resContactUs);
+router.get("/discussions", homeController.resDiscussions);
+router.get("/donate", homeController.resDonate);
+router.get("/events", homeController.resEvents);
+router.get("/about/news", homeController.resNews);
+router.get("/pets/pet", petController.details, petController.detailView);
+router.get("/about/questions", homeController.resQuestions);
+router.get("/about/volunteer", homeController.resVolunteer);
 
 // FORMS
-app.get("/add-pet", homeController.resAddPet);
-app.get("/add-event", homeController.resAddEvent);
-app.get("/login", homeController.resLogin);
-app.get("/signup", homeController.resSignup);
+router.get("/pets/add-pet", petController.new);
+router.get("/events/add-event", homeController.resAddEvent);
+router.get("/users/login", homeController.resLogin);
+router.get("/users/signup", homeController.resSignup);
 
 // POSTS
-app.post("/postPet", petController.savePet);
+router.post("/pets/create", petController.create, petController.redirectView);
+// app.post("/postPet", petController.savePet);
 
 app.use(errorController.logErrors);
 app.use(errorController.respondNoResourceFound);

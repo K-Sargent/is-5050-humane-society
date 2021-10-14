@@ -1,0 +1,63 @@
+<h1>Add a Pet</h1>
+<div class="row">
+	<div class="col-lg-6">
+		<section id="form" class="form">
+			<form action="/postPet" method="post" role="form" class="php-email-form">
+				<div class="row">
+					<div class="col-md-6 form-group">
+						<input type="text" name="name" class="form-control" id="name" placeholder="Pet Name" required="">
+					</div>
+					<div class="col-md-6 form-group mt-3 mt-md-0">
+						<select name="species" class="form-control py-2" id="species" required="">
+							<option>Select Species</option>
+							<option>Bird</option>
+							<option>Cat</option>
+							<option>Dog</option>
+							<option>Fish</option>
+						</select>
+					</div>
+					<div class="col-md-6 form-group">
+						<input type="text" name="breed" class="form-control" id="breed" placeholder="Breed" required="">
+					</div>
+					<div class="col-md-6 form-group">
+						<input type="number" name="age" class="form-control" id="age" placeholder="Age" required="">
+					</div>
+					<div class="col-md-6 form-group">
+						<input type="number" name="weight" class="form-control" id="weight" placeholder="Weight" required="">
+					</div>
+					<div class="col-md-6 form-group">
+						<input type="number" name="price" class="form-control" id="price" placeholder="Adoption Price" required="">
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="male">Male</label>
+						<input type="radio" id="male" name="gender" value="male">
+						<label for="female">Female</label>
+						<input type="radio" id="female" name="gender" value="female">
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="male">Housetrained</label>
+						<input type="radio" id="trained" name="houseTrained" value="true">
+						<label for="female">In Training</label>
+						<input type="radio" id="untrained" name="houseTrained" value="false">
+					</div>
+					<div class="col-md-12 form-group">
+						<div class="form-group mt-3">
+		                  <textarea class="form-control" name="description" rows="5" placeholder="Description" required=""></textarea>
+		                </div>
+					</div>
+					<div class="col-md-12 form-group">
+						<!-- <label for="image">Choose image to upload</label>
+							<input type="file" id="image" name="image" multiple> -->
+						<input type="text" name="image" class="form-control" id="image" placeholder="Image URL" required="">
+					</div>
+				</div>
+				<div class="my-3">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                </div>
+				<div class="text-center"><button name="submit" type="submit">Add This Pet</button></div>
+			</form>
+		</section>
+	</div>
+</div>
