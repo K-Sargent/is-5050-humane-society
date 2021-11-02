@@ -151,5 +151,19 @@ module.exports = {
     req.flash("success", "You have been logged out!");
     res.locals.redirect = "/";
     next();
-  }
+	},
+
+	submitDonation: (req, res, next) => {
+		let userId = req.params.id;
+
+		User.findById(userId)
+	      .then(user => {
+	        user.donations = user.donations + req.body.amount;
+			next();
+	      })
+	      .catch(error => {
+	        console.log(`Error fetching user by ID: ${error.message}`);
+	        next(error);
+	    });
+	}
 };

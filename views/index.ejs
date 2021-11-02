@@ -63,8 +63,10 @@
 
 					<% pets.forEach(pet => { %>
 						<div class="col-lg-4 col-md-6 d-flex align-items-between">
+
+							<!-- TODO: Add some kind of effect on hover -->
 							<div class="course-item">
-								<a class="" href="#">
+								<a class="" href="/pets/<%= pet.id %>">
 								<img src="<%= pet.image %>" class="img-fluid pet-card-img">
 								<div class="course-content">
 									<div class="d-flex justify-content-between align-items-center mb-0">

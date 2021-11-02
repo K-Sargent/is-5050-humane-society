@@ -1,1 +1,21 @@
 <h1>Donate</h1>
+<p class="lead">Thank you for your interest in saving our furry friends! Fill out the form below and your donation will be sent directly to the Shelter organization. These funds will be used to help rescue aditional animals as well as provide neccessary care to those already in our posession.</p>
+<div class="row">
+	<div class="col-lg-6">
+		<section id="form" class="form">
+			<% if (loggedIn) { %>
+				<form action="/submit-donation/<%= currentUser.id %>" method="POST" class="php-email-form">
+					<div class="row">
+						<div class="col-md-6 form-group">
+							<input type="number" name="amount" class="form-control my-3" placeholder="Donation Amount" required="">
+							<div class="text-center my-4"><button name="submit" type="submit">Make Donation</button></div>
+						</div>
+					</div>
+				</form>
+			<% } else { %>
+				<p>Please <a href="/users/login">log in</a> to make a donation to Shelter.</p>
+			<% } %>
+
+		</section>
+	</div>
+</div>

@@ -14,7 +14,8 @@ passportLocalMongoose = require("passport-local-mongoose"),
 	priviledged: Boolean,
 	petPreference: [String],
 	posts: [mongoose.Schema.Types.ObjectId],
-	zipCode: Number
+	zipCode: Number,
+	donations: Number
   });
 
   userSchema.plugin(passportLocalMongoose, {

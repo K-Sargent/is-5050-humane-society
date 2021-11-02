@@ -79,7 +79,7 @@ router.get("/about/volunteer", homeController.resVolunteer);
 
 // PETS
 router.get("/pets", petController.index, petController.indexView);
-router.get("/pets/pet", petController.details, petController.detailView);
+router.get("/pets/:id", petController.details, petController.detailView);
 router.get("/pets/add-pet", petController.new);
 router.post("/postPet", petController.create, petController.redirectView);
 
@@ -95,6 +95,7 @@ router.get("/users/signup", homeController.resSignup);
 router.post("/users/login/authenticate", userController.authenticate, userController.redirectView);
 router.get("/users/logout", userController.logout, userController.redirectView);
 router.get("/users/account", homeController.resAccount);
+router.get("/submit-donation/:id", userController.submitDonation, userController.redirectView);
 
 // EVENTS
 router.get("/events/add-event", homeController.resAddEvent);
