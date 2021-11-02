@@ -43,6 +43,23 @@
 	<%- include('partials/topNav') %>
 		<section id="layout-section" class="my-5">
 			<div id="layout-container" class="container">
+
+				<div class="flashes">
+					<% if (flashMessages) { %>
+						<% if (flashMessages.success) { %>
+
+							<!-- TODO: fix flash layout, toasts? -->
+							<div class="flash success">
+								<%= flashMessages.success %>
+							</div>
+						<% } else if (flashMessages.error) { %>
+							<div class="flash error">
+								<%= flashMessages.error %>
+							</div>
+						<% } %>
+					<% } %>
+				</div>
+
 				<%- body %>
 			</div>
 		</section>

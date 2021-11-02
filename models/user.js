@@ -1,15 +1,24 @@
 "use strict";
 
 const mongoose = require("mongoose"),
+passportLocalMongoose = require("passport-local-mongoose"),
   userSchema = mongoose.Schema({
     firstName: String,
 	lastName: String,
-    email: String,
-	password: String,
+    email: {
+		type: String,
+		required: true,
+		owercase: true,
+        unique: true
+	},
 	priviledged: Boolean,
-	petPreference: Array[Pet],
-	posts: Array[Post],
-    zipCode: Number
+	petPreference: [String],
+	posts: [mongoose.Schema.Types.ObjectId],
+	zipCode: Number
+  });
+
+  userSchema.plugin(passportLocalMongoose, {
+    usernameField: "email"
   });
 
 module.exports = mongoose.model("User", userSchema);

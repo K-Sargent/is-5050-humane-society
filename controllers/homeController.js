@@ -1,6 +1,6 @@
 module.exports = {
   	logRequestPaths: (req, res, next) => {
-	    console.log(`request made to: ${req.url}\n${JSON.stringify(req.body)}`);
+	    console.log(`request made to: ${req.url}\nrequest body: ${JSON.stringify(req.body)}`);
 	    next();
 	},
 

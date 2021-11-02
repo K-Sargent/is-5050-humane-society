@@ -1,25 +1,59 @@
 const port = 3000,
 	express = require("express"),
 	app = express(),
+	methodOverride = require("method-override"),
+	expressSession = require("express-session"),
+	cookieParser = require("cookie-parser"),
+	connectFlash = require("connect-flash"),
+    expressValidator = require("express-validator"),
+    passport = require("passport"),
 	homeController = require("./controllers/homecontroller"),
 	errorController = require("./controllers/errorController"),
 	petController = require("./controllers/petController"),
+	userController = require("./controllers/userController"),
 	layouts = require("express-ejs-layouts"),
-	mongoose = require("mongoose");
+	mongoose = require("mongoose"),
+	User = require("./models/user");
 
-	mongoose.connect("mongodb+srv://dbAdmin:adminPassword@is-5050-shelter.srhwi.mongodb.net/shelter?retryWrites=true&w=majority");
-
+// DATABASE CONNECTION
+mongoose.connect("mongodb+srv://dbAdmin:adminPassword@is-5050-shelter.srhwi.mongodb.net/shelter?retryWrites=true&w=majority");
 const db = mongoose.connection;
-const router = express.Router();
-const methodOverride = require("method-override");
+db.once("open", () => {
+  console.log("Successfully connected to MongoDB using Mongoose!");
+});
 
+// INITIALIZE ROUTER
+const router = express.Router();
+
+// MIDDLEWARE
 router.use(methodOverride("_method", {
   methods: ["POST", "GET"]
 }));
 
-// DATABASE CONNECTION
-db.once("open", () => {
-  console.log("Successfully connected to MongoDB using Mongoose!");
+app.use(cookieParser("secret_passcode"));
+app.use(
+  expressSession({
+    secret: "secret_passcode",
+    cookie: {
+      maxAge: 4000000
+    },
+    resave: false,
+    saveUninitialized: false
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+app.use(connectFlash());
+
+app.use((req, res, next) => {
+  res.locals.loggedIn = req.isAuthenticated();
+  res.locals.currentUser = req.user;
+  res.locals.flashMessages = req.flash();
+  next();
 });
 
 app.set("view engine", "ejs");
@@ -30,29 +64,40 @@ app.use(express.static("public"));
 app.use(homeController.logRequestPaths);
 app.use("/", router);
 
-// PAGES
+
+// ROUTES
 router.get("/", homeController.resHome);
 router.get("/index", homeController.resHome);
-router.get("/pets", petController.index, petController.indexView);
 router.get("/about", homeController.resAbout);
-router.get("/users/account", homeController.resAccount);
 router.get("/about/contact-us", homeController.resContactUs);
 router.get("/discussions", homeController.resDiscussions);
 router.get("/donate", homeController.resDonate);
 router.get("/events", homeController.resEvents);
 router.get("/about/news", homeController.resNews);
-router.get("/pets/pet", petController.details, petController.detailView);
 router.get("/about/questions", homeController.resQuestions);
 router.get("/about/volunteer", homeController.resVolunteer);
 
-// FORMS
+// PETS
+router.get("/pets", petController.index, petController.indexView);
+router.get("/pets/pet", petController.details, petController.detailView);
 router.get("/pets/add-pet", petController.new);
-router.get("/events/add-event", homeController.resAddEvent);
+router.post("/postPet", petController.create, petController.redirectView);
+
+// USERS
+router.post(
+	"/users/create",
+	userController.validate,
+	userController.create,
+	userController.redirectView
+);
 router.get("/users/login", homeController.resLogin);
 router.get("/users/signup", homeController.resSignup);
+router.post("/users/login/authenticate", userController.authenticate, userController.redirectView);
+router.get("/users/logout", userController.logout, userController.redirectView);
+router.get("/users/account", homeController.resAccount);
 
-// POSTS
-router.post("/postPet", petController.create, petController.redirectView);
+// EVENTS
+router.get("/events/add-event", homeController.resAddEvent);
 
 app.use(errorController.logErrors);
 app.use(errorController.respondNoResourceFound);

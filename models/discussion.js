@@ -5,7 +5,7 @@ const mongoose = require("mongoose"),
     date: Date,
 	user: User,
 	description: String,
-	comments: Discussion
+	comments: [mongoose.Schema.Types.ObjectId]
   });
 
 module.exports = mongoose.model("Discussion", discussionSchema);

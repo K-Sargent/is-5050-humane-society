@@ -1,1 +1,17 @@
-<h1>Login</h1>
+<h1>Log In</h1>
+<div class="row">
+	<div class="col-lg-6">
+		<section id="form" class="form">
+			<form action="/users/login/authenticate" method="POST" class="php-email-form">
+				<div class="row">
+					<div class="col-md-6 form-group">
+						<input type="text" name="email" class="form-control my-3" id="name" placeholder="Email" required="">
+						<input type="password" name="password" class="form-control my-3" id="name" placeholder="Password" required="">
+						<p>Don't have an account? <a href="/users/signup">create a new account here</a></p>
+						<div class="text-center my-3"><button name="submit" type="submit">Log In</button></div>
+					</div>
+				</div>
+			</form>
+		</section>
+	</div>
+</div>

@@ -1,1 +1,24 @@
-<h1>Signup</h1>
+<h1>Sign Up</h1>
+<div class="row">
+	<div class="col-lg-6">
+		<section id="form" class="form">
+			<form action="/users/create" method="POST" class="php-email-form">
+				<div class="row">
+					<div class="col-md-6 form-group">
+						<input type="text" name="firstName" class="form-control my-3"  placeholder="First Name" required="">
+						<input type="text" name="lastName" class="form-control my-3"  placeholder="Last Name" required="">
+						<input type="text" name="email" class="form-control my-3"  placeholder="Email" required="">
+						<input type="password" name="password" class="form-control my-3"  placeholder="Password" required="">
+						<input type="number" name="zipCode" class="form-control my-3" placeholder="Zipcode" required="">
+					    <input type="checkbox" class="form-check-input" value="dogs">Dogs
+					    <input type="checkbox" class="form-check-input" value="cats">Cats
+					    <input type="checkbox" class="form-check-input" value="birds">Birds
+						<input type="checkbox" class="form-check-input" value="fish">Fish
+						<p>Already have an account? <a href="/users/login">log in here</a></p>
+						<div class="text-center my-3"><button name="submit" type="submit">Sign Up</button></div>
+					</div>
+				</div>
+			</form>
+		</section>
+	</div>
+</div>
