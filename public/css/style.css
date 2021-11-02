@@ -31,6 +31,24 @@ h1, h2, h3, h4, h5, h6 {
 	background-color: #5fcf80!important;
 }
 
+.text-primary {
+	color: #5fcf80!important;
+}
+
+.text-secondary {
+	color: #37423b!important;
+}
+
+.hover-card {
+	background: #5fcf80;
+	color: #fff;
+}
+
+.hover-card:hover {
+	background: #3ac162;
+    color: #fff;
+}
+
 .btn {
   background: #5fcf80;
   color: #fff;

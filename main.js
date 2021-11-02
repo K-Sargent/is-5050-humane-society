@@ -66,8 +66,8 @@ app.use("/", router);
 
 
 // ROUTES
-router.get("/", homeController.resHome);
-router.get("/index", homeController.resHome);
+router.get("/", petController.index, homeController.resHome);
+router.get("/index", petController.index, homeController.resHome);
 router.get("/about", homeController.resAbout);
 router.get("/about/contact-us", homeController.resContactUs);
 router.get("/discussions", homeController.resDiscussions);
