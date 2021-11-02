@@ -5,8 +5,9 @@ const port = 3000,
 	errorController = require("./controllers/errorController"),
 	petController = require("./controllers/petController"),
 	layouts = require("express-ejs-layouts"),
-	mongoose = require("mongoose"),
-	dbconnectionstring = "mongodb+srv://dbAdmin:adminPassword@is-5050-shelter.srhwi.mongodb.net/shelter?retryWrites=true&w=majority";
+	mongoose = require("mongoose");
+
+	mongoose.connect("mongodb+srv://dbAdmin:adminPassword@is-5050-shelter.srhwi.mongodb.net/shelter?retryWrites=true&w=majority");
 
 const db = mongoose.connection;
 const router = express.Router();
@@ -32,7 +33,7 @@ app.use("/", router);
 // PAGES
 router.get("/", homeController.resHome);
 router.get("/index", homeController.resHome);
-router.get("/pets", petController.indexView);
+router.get("/pets", petController.index, petController.indexView);
 router.get("/about", homeController.resAbout);
 router.get("/users/account", homeController.resAccount);
 router.get("/about/contact-us", homeController.resContactUs);
@@ -51,7 +52,7 @@ router.get("/users/login", homeController.resLogin);
 router.get("/users/signup", homeController.resSignup);
 
 // POSTS
-router.post("/postPet", petController.savePet, petController.redirectView);
+router.post("/postPet", petController.create, petController.redirectView);
 
 app.use(errorController.logErrors);
 app.use(errorController.respondNoResourceFound);

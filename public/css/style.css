@@ -27,6 +27,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Raleway", sans-serif;
 }
 
+.bg-primary {
+	background-color: #5fcf80!important;
+}
+
 .btn {
   background: #5fcf80;
   color: #fff;

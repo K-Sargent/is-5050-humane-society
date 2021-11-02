@@ -1,4 +1,31 @@
 
 <h1>Listed Pets</h1>
 <a class="btn" href="/pets/add-pet"><i class="fas fa-plus"></i> Add Pet</a>
-	
+
+<section id="popular-courses" class="courses">
+	<div class="container" data-aos="fade-up">
+		<div class="row" data-aos="zoom-in" data-aos-delay="100">
+			<% pets.forEach(pet => { %>
+				<div class="col-lg-4 col-md-6 d-flex d-flex align-items-between">
+					<div class="course-item">
+						<a class="" href="#">
+						<img src="/images/placeholder-pet.jpg" class="img-fluid pet-card-img">
+						<div class="course-content">
+							<div class="d-flex justify-content-between align-items-center mb-0">
+								<h2><strong><%= pet.name %></strong></h2>
+								<p class="price">$<%= pet.price %></p>
+							</div>
+							<p><small><strong><%= pet.age %> year old <%= pet.gender %> <%= pet.breed %></strong></small></p>
+							<p><%= pet.shortDescription %></p>
+							<span class="badge badge-info bg-secondary"><%= pet.species %></span>
+							<% if(pet.houseTrained) { %>
+								<span class="badge badge-info bg-primary">Housetrained</span>
+							<% } %>
+						</div>
+						</a>
+					</div>
+				</div>
+			<% }); %>
+		</div>
+	</div>
+</section>

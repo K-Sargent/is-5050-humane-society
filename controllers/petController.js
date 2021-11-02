@@ -51,7 +51,7 @@ module.exports = {
 		});
 		newPet.save().then(result => {
 			console.log("pet saved");
-			next();
+			res.redirect("/pets");
 		}).catch(error => {
 			if (error) res.send(error);
 		});
@@ -84,9 +84,9 @@ module.exports = {
 
 	redirectView: (req, res, next) => {
 		let redirectPath = res.locals.redirect;
-		if (redirectPath) res.redirect(redirectPath);
+		if (redirectPath !== undefined) res.redirect(redirectPath);
 		else next();
-	},
+  	},
 
 	details: (req, res, next) => {
 		let petId = req.params.id;
