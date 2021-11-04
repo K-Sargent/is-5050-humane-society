@@ -1,1 +1,9 @@
-<h1>Add New Event</h1>
+<h1>Create a New Event</h1>
+
+<form action="/events/create" method="POST" class="php-email-form">
+    <input type="text" name="title" class="form-control" id="title" placeholder="Event Name" required="">
+    <input type="date" name="date" class="form-control" id="date" required="">
+    <input type="location" name="location" class="form-control" id="location" placeholder="Location" required="">
+    <input type="description" name="description" class="form-control" id="description" placeholder="Description" required="">
+    <div class="btn"><button name="submit" type="submit">Create</button></div>
+</form>

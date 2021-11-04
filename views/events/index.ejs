@@ -1,1 +1,13 @@
-<h1>Events</h1>
+<a class="btn" href="/events/add-event"><i class="fas fa-plus"></i>Create Event</a>
+
+<% for (event of events) { %>
+    <div class="card">
+        <h1><%= event.title %></h1>
+        <h5>When: <%= event.date.toDateString() %></h2>
+        <h5>Where: <%= event.location %></h2>
+        <br>
+        <p>
+            <%= event.description %>
+        </p>
+    </div>
+<% } %>

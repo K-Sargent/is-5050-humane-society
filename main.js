@@ -11,6 +11,7 @@ const port = 3000,
 	errorController = require("./controllers/errorController"),
 	petController = require("./controllers/petController"),
 	userController = require("./controllers/userController"),
+	eventController = require("./controllers/eventController"),
 	layouts = require("express-ejs-layouts"),
 	mongoose = require("mongoose"),
 	User = require("./models/user");
@@ -72,7 +73,6 @@ router.get("/about", homeController.resAbout);
 router.get("/about/contact-us", homeController.resContactUs);
 router.get("/discussions", homeController.resDiscussions);
 router.get("/donate", homeController.resDonate);
-router.get("/events", homeController.resEvents);
 router.get("/about/news", homeController.resNews);
 router.get("/about/questions", homeController.resQuestions);
 router.get("/about/volunteer", homeController.resVolunteer);
@@ -98,7 +98,9 @@ router.get("/users/account", homeController.resAccount);
 router.get("/submit-donation/:id", userController.submitDonation, userController.redirectView);
 
 // EVENTS
-router.get("/events/add-event", homeController.resAddEvent);
+router.get("/events", eventController.fetchEvents, eventController.eventView);
+router.get("/events/add-event", eventController.addEvent);
+router.post("/events/create", eventController.create, eventController.redirectView);
 
 app.use(errorController.logErrors);
 app.use(errorController.respondNoResourceFound);
