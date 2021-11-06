@@ -49,6 +49,10 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
 }
 
+.event-card {
+	border-left: 10px solid #5fcf80;
+}
+
 .btn {
   background: #5fcf80;
   color: #fff;

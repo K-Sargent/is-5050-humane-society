@@ -1,9 +1,25 @@
 <h1>Create a New Event</h1>
 
-<form action="/events/create" method="POST" class="php-email-form">
-    <input type="text" name="title" class="form-control" id="title" placeholder="Event Name" required="">
-    <input type="date" name="date" class="form-control" id="date" required="">
-    <input type="location" name="location" class="form-control" id="location" placeholder="Location" required="">
-    <input type="description" name="description" class="form-control" id="description" placeholder="Description" required="">
-	<div class="text-center"><button name="submit" type="submit">Create</button></div>
-</form>
+<div class="row">
+	<div class="col-lg-6">
+		<section id="form" class="form">
+			<form action="/events/create" method="POST" class="php-email-form">
+				<div class="row">
+					<div class="col-md-6 form-group">
+						<input type="text" name="title" class="form-control" id="title" placeholder="Event Name" required="">
+					</div>
+					<div class="col-md-6 form-group">
+						<input type="date" name="date" class="form-control" id="date" required="">
+					</div>
+					<div class="col-md-12 form-group">
+						<input type="location" name="location" class="form-control" id="location" placeholder="Location" required="">
+					</div>
+					<div class="col-md-12 form-group">
+						<input type="description" name="description" class="form-control" id="description" placeholder="Description" required="">
+					</div>
+				</div>
+				<div class="text-center"><button name="submit" type="submit">Create</button></div>
+			</form>
+		</section>
+	</div>
+</div>
