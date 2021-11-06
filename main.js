@@ -1,6 +1,7 @@
 const port = 3000,
 	express = require("express"),
 	app = express(),
+	router = require("./routes/index"),
 	methodOverride = require("method-override"),
 	expressSession = require("express-session"),
 	cookieParser = require("cookie-parser"),
@@ -23,11 +24,8 @@ db.once("open", () => {
   console.log("Successfully connected to MongoDB using Mongoose!");
 });
 
-// INITIALIZE ROUTER
-const router = express.Router();
-
 // MIDDLEWARE
-router.use(methodOverride("_method", {
+app.use(methodOverride("_method", {
   methods: ["POST", "GET"]
 }));
 
@@ -64,46 +62,5 @@ app.use(layouts);
 app.use(express.static("public"));
 app.use(homeController.logRequestPaths);
 app.use("/", router);
-
-
-// ROUTES
-router.get("/", petController.index, homeController.resHome);
-router.get("/index", petController.index, homeController.resHome);
-router.get("/about", homeController.resAbout);
-router.get("/about/contact-us", homeController.resContactUs);
-router.get("/discussions", homeController.resDiscussions);
-router.get("/donate", homeController.resDonate);
-router.get("/about/news", homeController.resNews);
-router.get("/about/questions", homeController.resQuestions);
-router.get("/about/volunteer", homeController.resVolunteer);
-
-// PETS
-router.get("/pets", petController.index, petController.indexView);
-router.get("/pets/:id", petController.details, petController.detailView);
-router.get("/pets/add-pet", petController.new);
-router.post("/postPet", petController.create, petController.redirectView);
-
-// USERS
-router.post(
-	"/users/create",
-	userController.validate,
-	userController.create,
-	userController.redirectView
-);
-router.get("/users/login", homeController.resLogin);
-router.get("/users/signup", homeController.resSignup);
-router.post("/users/login/authenticate", userController.authenticate, userController.redirectView);
-router.get("/users/logout", userController.logout, userController.redirectView);
-router.get("/users/account", homeController.resAccount);
-router.get("/submit-donation/:id", userController.submitDonation, userController.redirectView);
-
-// EVENTS
-router.get("/events", eventController.fetchEvents, eventController.eventView);
-router.get("/events/add-event", eventController.addEvent);
-router.post("/events/create", eventController.create, eventController.redirectView);
-
-app.use(errorController.logErrors);
-app.use(errorController.respondNoResourceFound);
-app.use(errorController.respondInternalError);
 
 app.listen(port, () => {console.log(`Server running on port ${port}`)});

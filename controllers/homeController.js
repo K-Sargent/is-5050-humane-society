@@ -12,9 +12,6 @@ module.exports = {
 		res.render("about/index");
 	},
 
-	resAccount: (req, res) => {
-		res.render("users/account");
-	},
 
 	resAddEvent: (req, res) => {
 		res.render("events/add-event");
@@ -36,9 +33,7 @@ module.exports = {
 		res.render("events/index");
 	},
 
-	resLogin: (req, res) => {
-		res.render("users/login");
-	},
+
 
 	resNews: (req, res) => {
 		res.render("about/news/index");
@@ -48,9 +43,7 @@ module.exports = {
 		res.render("about/questions");
 	},
 
-	resSignup: (req, res) => {
-		res.render("users/signup");
-	},
+
 
 	resVolunteer: (req, res) => {
 		res.render("about/volunteer");
