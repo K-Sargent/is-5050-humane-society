@@ -9,7 +9,7 @@
 				<p class="lead">Sorry! There are no pets that match this description. See <a href="/pets">all pets</a> instead?</p>
 			<% } %>
 			<% pets.forEach(pet => { %>
-				<div class="col-lg-4 col-md-6 d-flex d-flex align-items-between">
+				<div class="col-lg-4 col-md-6 d-flex align-items-between my-3">
 					<div class="course-item shadow-sm">
 						<a class="" href="/pets/<%= pet.id %>">
 						<img src="<%= pet.image %>" class="img-fluid pet-card-img">

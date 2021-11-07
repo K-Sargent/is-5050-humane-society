@@ -44,52 +44,34 @@
 
 <body>
 	<%- include('partials/topNav') %>
+
+
 	<section id="layout-section" class="my-5">
 		<div id="layout-container" class="container">
-			<div class="toast">
-				<div class="toast-header">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut ali
+			<% if (flashMessages) { %>
+				<div class="sticky-top m-0 mt-3" aria-live="polite" aria-atomic="true">
+					<div class="toast border-0" style="position: absolute; top: 0; right: 0;">
+						<% if (flashMessages.success) { %>
+							<div class="toast-header d-flex justify-content-between" style="background-color: #0D8D27">
+								<strong class="mr-auto" style="color: white"><i class="fas fa-check">&nbsp;</i> Sweet!</strong>
+
+							</div>
+							<div class="toast-body">
+								<%= flashMessages.success %>
+							</div>
+						<% } else if (flashMessages.error) { %>
+							<div class="toast-header d-flex justify-content-between" style="background-color: #AB1633">
+								<strong class="mr-auto" style="color: white"><i class="fas fa-exclamation-circle">&nbsp;</i> Aw Snap.</strong>
+							</div>
+							<div class="toast-body">
+								<%= flashMessages.error %>
+							</div>
+						<% } %>
+					</div>
 				</div>
-				<div class="toast-body">
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut ali
-				</div>
-			</div>
+			<% } %>
 
-			<!-- <div class="toast" data-autohide="false">
-				<% if (flashMessages) { %>
-					<% if (flashMessages.success) { %>
-						<div class="toast-header">
-							<%= flashMessages.success %>
-						</div>
-						<div class="toast-body">
-							<%= flashMessages.error %>
-						</div>
-					<% } else if (flashMessages.error) { %>
-						<div class="toast-header">
-							<%= flashMessages.success %>
-						</div>
-						<div class="toast-body">
-							<%= flashMessages.error %>
-						</div>
-					<% } %>
-				<% } %>
-			</div> -->
-
-			<!-- <div class="flashes">
-				<% if (flashMessages) { %>
-					<% if (flashMessages.success) { %>
-						<div class="flash success">
-							<%= flashMessages.success %>
-						</div>
-					<% } else if (flashMessages.error) { %>
-						<div class="flash error">
-							<%= flashMessages.error %>
-						</div>
-					<% } %>
-				<% } %>
-			</div> -->
-
-				<%- body %>
+			<%- body %>
 			</div>
 		</section>
 		<%- include('partials/footer') %>
@@ -97,20 +79,6 @@
 
 <script>
 	$(document).ready(function(){
-		<% if (flashMessages) { %>
-			// $('.toast').toast('show');
-			$.toast({
-				type: 'info',
-				title: 'Notice!',
-				subtitle: '11 mins ago',
-				content: 'Hello, world! This is a toast message.',
-				delay: 5000,
-				img: {
-					src: 'https://via.placeholder.com/20',
-					class: 'rounded-0', /**  Classes you want to apply separated my a space to modify the image **/
-					alt: 'Image'
-				}
-			})
-		<% } %>
+		$('.toast').toast('show');
 	});
 </script>
