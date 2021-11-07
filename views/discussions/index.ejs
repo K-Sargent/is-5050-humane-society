@@ -1,1 +1,9 @@
 <h1>Discussion Board</h1>
+
+<% for (discussion of discussions) { %>
+    <a href="/discussions/<%= discussion._id %>">
+        <div class="card">
+            <h1><%= discussion.author %></h1>
+        </div>
+    </a>
+<% } %>
