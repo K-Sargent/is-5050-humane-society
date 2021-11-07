@@ -5,13 +5,15 @@ const router = require("express").Router(),
   homeRoutes = require("./homeRoutes"),
   errorRoutes = require("./errorRoutes"),
   petRoutes = require("./petRoutes"),
+  newsRoutes = require("./newsRoutes"),
+  discussionRoutes = require("./discussionRoutes"),
   eventRoutes = require("./eventRoutes");
-  // discussionRoutes = require("./discussionRoutes");
 
 router.use("/users", userRoutes);
 router.use("/pets", petRoutes);
 router.use("/events", eventRoutes);
-// router.use("/discussions", discussionRoutes);
+router.use("/news", newsRoutes);
+router.use("/discussions", discussionRoutes);
 router.use("/", homeRoutes);
 router.use("/", errorRoutes);
 

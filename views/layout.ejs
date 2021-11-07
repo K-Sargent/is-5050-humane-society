@@ -2,66 +2,115 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Shelter</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+	<title>Shelter</title>
+	<meta content="" name="description">
+	<meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="/images/favicon.png" rel="icon">
-  <link href="/images/apple-touch-icon.png" rel="apple-touch-icon">
+	<!-- Favicons -->
+	<link href="/images/favicon.png" rel="icon">
+	<link href="/images/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Fontawesome Icons -->
-  <script src="https://kit.fontawesome.com/584d265fad.js" crossorigin="anonymous"></script>
+	<!-- Fontawesome Icons -->
+	<script src="https://kit.fontawesome.com/584d265fad.js" crossorigin="anonymous"></script>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="/vendor/aos/aos.css" rel="stylesheet">
-  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+	<!-- Vendor CSS Files -->
+	<link href="/vendor/animate.css/animate.min.css" rel="stylesheet">
+	<link href="/vendor/aos/aos.css" rel="stylesheet">
+	<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+	<link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+	<link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+	<link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <link href="/css/style.css" rel="stylesheet">
+	<!-- Template Main CSS File -->
+	<link href="/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Mentor - v4.5.0
-  * Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+	<!-- JQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+	<!-- =======================================================
+	* Template Name: Mentor - v4.5.0
+	* Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
+	* Author: BootstrapMade.com
+	* License: https://bootstrapmade.com/license/
+	======================================================== -->
 </head>
 
 <body>
 	<%- include('partials/topNav') %>
-		<section id="layout-section" class="my-5">
-			<div id="layout-container" class="container">
-
-				<div class="flashes">
-					<% if (flashMessages) { %>
-						<% if (flashMessages.success) { %>
-
-							<!-- TODO: fix flash layout, toasts? -->
-							<div class="flash success">
-								<%= flashMessages.success %>
-							</div>
-						<% } else if (flashMessages.error) { %>
-							<div class="flash error">
-								<%= flashMessages.error %>
-							</div>
-						<% } %>
-					<% } %>
+	<section id="layout-section" class="my-5">
+		<div id="layout-container" class="container">
+			<div class="toast">
+				<div class="toast-header">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut ali
 				</div>
+				<div class="toast-body">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut ali
+				</div>
+			</div>
+
+			<!-- <div class="toast" data-autohide="false">
+				<% if (flashMessages) { %>
+					<% if (flashMessages.success) { %>
+						<div class="toast-header">
+							<%= flashMessages.success %>
+						</div>
+						<div class="toast-body">
+							<%= flashMessages.error %>
+						</div>
+					<% } else if (flashMessages.error) { %>
+						<div class="toast-header">
+							<%= flashMessages.success %>
+						</div>
+						<div class="toast-body">
+							<%= flashMessages.error %>
+						</div>
+					<% } %>
+				<% } %>
+			</div> -->
+
+			<!-- <div class="flashes">
+				<% if (flashMessages) { %>
+					<% if (flashMessages.success) { %>
+						<div class="flash success">
+							<%= flashMessages.success %>
+						</div>
+					<% } else if (flashMessages.error) { %>
+						<div class="flash error">
+							<%= flashMessages.error %>
+						</div>
+					<% } %>
+				<% } %>
+			</div> -->
 
 				<%- body %>
 			</div>
 		</section>
-	<%- include('partials/footer') %>
-</body>
+		<%- include('partials/footer') %>
+	</body>
+
+<script>
+	$(document).ready(function(){
+		<% if (flashMessages) { %>
+			// $('.toast').toast('show');
+			$.toast({
+				type: 'info',
+				title: 'Notice!',
+				subtitle: '11 mins ago',
+				content: 'Hello, world! This is a toast message.',
+				delay: 5000,
+				img: {
+					src: 'https://via.placeholder.com/20',
+					class: 'rounded-0', /**  Classes you want to apply separated my a space to modify the image **/
+					alt: 'Image'
+				}
+			})
+		<% } %>
+	});
+</script>

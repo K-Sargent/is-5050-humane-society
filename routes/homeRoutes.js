@@ -11,7 +11,6 @@ const router = require("express").Router(),
 	router.get("/about/contact-us", homeController.resContactUs);
 	router.get("/discussions", homeController.resDiscussions);
 	router.get("/donate", homeController.resDonate);
-	router.get("/about/news", homeController.resNews);
 	router.get("/about/questions", homeController.resQuestions);
 	router.get("/about/volunteer", homeController.resVolunteer);
 
