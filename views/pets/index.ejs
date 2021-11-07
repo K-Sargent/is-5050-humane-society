@@ -5,9 +5,12 @@
 <section id="popular-courses" class="courses">
 	<div class="container" data-aos="fade-up">
 		<div class="row" data-aos="zoom-in" data-aos-delay="100">
+			<% if (!pets.length > 0) { %>
+				<p class="lead">Sorry! There are no pets that match this description. See <a href="/pets">all pets</a> instead?</p>
+			<% } %>
 			<% pets.forEach(pet => { %>
 				<div class="col-lg-4 col-md-6 d-flex d-flex align-items-between">
-					<div class="course-item">
+					<div class="course-item shadow-sm">
 						<a class="" href="/pets/<%= pet.id %>">
 						<img src="<%= pet.image %>" class="img-fluid pet-card-img">
 						<div class="course-content">

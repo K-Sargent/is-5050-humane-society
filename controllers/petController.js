@@ -4,7 +4,7 @@ const Pet = require("../models/pet");
 
 module.exports = {
 	index: (req, res, next) => {
-		Pet.find().then(pets => {
+		Pet.find(req.query).sort({name: 1}).then(pets => {
 			res.locals.pets = pets;
 			next();
 		}).catch(error => {
@@ -35,7 +35,6 @@ module.exports = {
 	},
 
 	savePet: (req, res) => {
-		console.log(req.body);
 		let newPet = new Pet({
 			name: req.body.name,
 			species: req.body.species,
@@ -74,7 +73,7 @@ module.exports = {
 
 		Pet.create(petParams).then(pet => {
 			res.locals.redirect = "/pets";
-			res.locals.pet.pet = pet;
+			res.locals.pet = pet;
 			next();
 		}).catch(error => {
 			console.log(`Error saving pet: ${error.message}`);

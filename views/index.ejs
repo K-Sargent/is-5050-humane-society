@@ -22,28 +22,28 @@
 				<div class="col-lg-3 col-md-5 mt-3">
 					<div class="card shadow-sm border rounded hover-card">
 						<div class="card-body p-4">
-							<h2 class="text-center pt-2"><i class="align-end fas fa-cat fa-lg text-white">&nbsp;</i> <a class="text-white stretched-link" href="#">Cats</a></h2>
+							<h2 class="text-center pt-2"><i class="align-end fas fa-cat fa-lg text-white">&nbsp;</i> <a class="text-white stretched-link" href="/pets?species=cat">Cats</a></h2>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-5 mt-3">
 					<div class="card shadow-sm border rounded hover-card">
 						<div class="card-body p-4">
-							<h2 class="text-center pt-2"><i class="align-end fas fa-dog fa-lg text-white">&nbsp;</i> <a class="text-white stretched-link" href="#">Dogs</a></h2>
+							<h2 class="text-center pt-2"><i class="align-end fas fa-dog fa-lg text-white">&nbsp;</i> <a class="text-white stretched-link" href="/pets?species=dog">Dogs</a></h2>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-5 mt-3">
 					<div class="card shadow-sm border rounded hover-card">
 						<div class="card-body p-4">
-							<h2 class="text-center pt-2"><i class="align-end fas fa-fish fa-lg text-white">&nbsp;</i> <a class="text-white stretched-link" href="#">Fish</a></h2>
+							<h2 class="text-center pt-2"><i class="align-end fas fa-fish fa-lg text-white">&nbsp;</i> <a class="text-white stretched-link" href="/pets?species=fish">Fish</a></h2>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-5 mt-3">
 					<div class="card shadow-sm border rounded hover-card">
 						<div class="card-body p-4">
-							<h2 class="text-center pt-2"><i class="align-end fas fa-dove fa-lg text-white">&nbsp;</i> <a class="text-white stretched-link" href="#">Birds</a></h2>
+							<h2 class="text-center pt-2"><i class="align-end fas fa-dove fa-lg text-white">&nbsp;</i> <a class="text-white stretched-link" href="/pets?species=bird">Birds</a></h2>
 						</div>
 					</div>
 				</div>
@@ -61,7 +61,7 @@
 
 				<div class="row" data-aos="zoom-in" data-aos-delay="100">
 
-					<% pets.forEach(pet => { %>
+					<% pets.slice(0, 3).forEach(pet => { %>
 						<div class="col-lg-4 col-md-6 d-flex align-items-between">
 
 							<!-- TODO: Add some kind of effect on hover -->
