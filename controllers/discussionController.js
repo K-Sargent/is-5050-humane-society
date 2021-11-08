@@ -1,5 +1,6 @@
 "use strict";
 
+const discussion = require("../models/discussion");
 const Discussion = require("../models/discussion");
 
 module.exports = {
@@ -29,5 +30,24 @@ module.exports = {
     },
     viewDetail: (req, res) => {
         res.render("discussions/thread");
+    },
+    redirectView: (req, res, next) => {
+		let redirectPath = res.locals.redirect;
+		if (redirectPath !== undefined) res.redirect(redirectPath);
+		else next();
+  	},
+    createComment: (req, res, next) => { // handle the creating of event object
+        let commentParams = {
+            data: req.body.comment,
+            author: req.body.author,
+		};
+
+        Discussion.updateOne({_id: req.params.id}, { $push: { comments: commentParams } }).then(discussion => {
+            res.locals.redirect = `/discussions/${req.params.id}`;
+            next();
+        }).catch(error => {
+            console.log(`Error saving comment to discussion: ${error.message}`);
+			next(error);
+        });
     },
 };

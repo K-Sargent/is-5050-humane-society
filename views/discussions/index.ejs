@@ -1,9 +1,10 @@
 <h1>Discussion Board</h1>
 
 <% for (discussion of discussions) { %>
-    <a href="/discussions/<%= discussion._id %>">
-        <div class="card">
-            <h1><%= discussion.author %></h1>
-        </div>
-    </a>
+    <div class="card">
+        <h5>Posted by: <%= discussion.author %>, on <%= discussion.datePosted.toDateString() %></h5>
+        <h6><%= discussion.preview %></h6>
+        <h6>(<%= discussion.comments.length %> Comments)</h6>
+        <a class="btn" href="/discussions/<%= discussion._id %>">Read Entire Post</a>
+    </div>
 <% } %>

@@ -1,5 +1,22 @@
-<h1>Specific thread</h1>
+<h1>Posted by: <%= discussion.author %>, on <%= discussion.datePosted.toDateString() %></h1>
 
-<h5><%= discussion.author %></h5>
-
+<h4><%= discussion.description %></h4>
+<br>
+<% for (comment of discussion.comments) { %>
+    <div class="card" style="margin-left: 30px">
+        <h6>Comment by: <%= comment.author %></h6>
+        <p><%= comment.data %></p>
+    </div>
+<% } %>
+<br>
 <!-- if logged in, be able to leave a comment -->
+<% if (loggedIn) { %>
+    <h6>Leave a comment below</h6>
+    <form action="/discussions/<%= discussion._id %>/postComment" method="POST" class="php-email-form">
+        <input type="text" name="comment" class="form-control" id="comment" placeholder="Comment here" required="">
+        <input type="hidden" id="author" name="author" value="<%= currentUser.firstName %> <%= currentUser.lastName %>">
+        <div class="text-center"><button name="submit" type="submit">Post Reply</button></div>
+    </form>
+<% } else { %>
+    <a href="/users/login"><h6>Log in to comment</h6></a>
+<% } %>
