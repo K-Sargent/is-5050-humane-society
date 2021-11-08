@@ -1,0 +1,21 @@
+<h1>Shelter News</h1>
+<a class="btn mt-4" href="/news/add-news"><i class="fas fa-plus"></i>Create News</a>
+
+<section id="popular-courses" class="courses">
+	<div class="container" data-aos="fade-up">
+		<div class="row" data-aos="zoom-in" data-aos-delay="100">
+			<% for (ne of news) { %>
+				<div class="card my-3 shadow-sm event-card">
+					<div class="card-body">
+						<div class="section-title mt-3 pb-0 mb-1">
+							<h2><%= ne.date.toDateString() %></h2>
+							<p><%= ne.title %></p>
+						</div>
+						<p><i class="bi bi-pencil-square text-primary">&nbsp;</i> <%= ne.author %></p>
+						<p class="mt-3 mb-2"><%= ne.description %></p>
+					</div>
+				</div>
+			<% } %>
+		</div>
+	</div>
+</section>

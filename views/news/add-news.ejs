@@ -1,0 +1,22 @@
+<h1>Create a News Post</h1>
+
+<div class="row">
+	<div class="col-lg-6">
+		<section id="form" class="form">
+			<form action="/news/create" method="POST" class="php-email-form">
+				<div class="row">
+					<div class="col-md-6 form-group">
+						<input type="text" name="title" class="form-control" id="title" placeholder="Event Name" required="">
+					</div>
+					<div class="col-md-12 form-group">
+						<input type="text" name="author" class="form-control" id="author" placeholder="Author" required="">
+					</div>
+					<div class="col-md-12 form-group">
+						<input type="description" name="description" class="form-control" id="description" placeholder="Description" required="">
+					</div>
+				</div>
+				<div class="text-center"><button name="submit" type="submit">Create</button></div>
+			</form>
+		</section>
+	</div>
+</div>
