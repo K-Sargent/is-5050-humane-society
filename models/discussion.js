@@ -15,6 +15,6 @@ const mongoose = require("mongoose"),
 	// comments: [mongoose.Schema.Types.ObjectId]
   });
 
-discussionSchema.virtual("preview").get(function () {return this.description.split(" ").slice(0, 5).join(" ") + "..."});
+discussionSchema.virtual("preview").get(function () {return this.description.split(" ").slice(0, 8).join(" ") + "..."});
 
 module.exports = mongoose.model("Discussion", discussionSchema);

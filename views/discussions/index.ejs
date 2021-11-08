@@ -1,10 +1,18 @@
 <h1>Discussion Board</h1>
-
-<% for (discussion of discussions) { %>
-    <div class="card">
-        <h5>Posted by: <%= discussion.author %>, on <%= discussion.datePosted.toDateString() %></h5>
-        <h6><%= discussion.preview %></h6>
-        <h6>(<%= discussion.comments.length %> Comments)</h6>
-        <a class="btn" href="/discussions/<%= discussion._id %>">Read Entire Post</a>
-    </div>
-<% } %>
+<section id="popular-courses" class="courses">
+	<div class="container" data-aos="fade-up">
+		<div class="row" data-aos="zoom-in" data-aos-delay="100">
+			<% for (discussion of discussions) { %>
+				<div class="card my-3 shadow-sm">
+					<div class="card-body">
+						<div class="section-title mt-3 pb-0 mb-1">
+							<h2>Posted by <%= discussion.author %> on <%= discussion.datePosted.toDateString() %></h2>
+							<p><%= discussion.preview %></p>
+						</div>
+						<p class="mt-3 mb-2"><%= discussion.comments.length %> Comment(s) | <a class="stretched-link" href="/discussions/<%= discussion._id %>">Read Entire Post</a></p>
+					</div>
+				</div>
+			<% } %>
+		</div>
+	</div>
+</section>
