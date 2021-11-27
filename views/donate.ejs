@@ -4,7 +4,7 @@
 	<div class="col-lg-6">
 		<section id="form" class="form">
 			<% if (loggedIn) { %>
-				<form action="/submit-donation/<%= currentUser.id %>" method="POST" class="php-email-form">
+				<form action="/users/submit-donation/<%= currentUser._id %>" method="POST" class="php-email-form">
 					<div class="row">
 						<div class="col-md-6 form-group">
 							<input type="number" name="amount" class="form-control my-3" placeholder="Donation Amount" required="">

@@ -4,7 +4,8 @@ const Pet = require("../models/pet");
 
 module.exports = {
 	index: (req, res, next) => {
-		Pet.find(req.query).sort({name: 1}).then(pets => {
+		let sortParam = req.query.sortby || "dateAdded";
+		Pet.find(req.query).sort(sortParam).then(pets => {
 			res.locals.pets = pets;
 			next();
 		}).catch(error => {

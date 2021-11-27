@@ -13,7 +13,7 @@ const router = require("express").Router(),
 	router.get("/signup", userController.resSignup);
 	router.post("/login/authenticate", userController.authenticate, userController.redirectView);
 	router.get("/logout", userController.logout, userController.redirectView);
-	router.get("/submit-donation/:id", userController.submitDonation, userController.redirectView);
-	router.get("/:id", userController.resAccount);
+	router.post("/submit-donation/:id", userController.submitDonation, userController.redirectView);
+	router.get("/account", userController.resAccount);
 
 module.exports = router;

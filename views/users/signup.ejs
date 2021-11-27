@@ -1,7 +1,7 @@
 <h1>Sign Up</h1>
 <div class="row">
 	<div class="col-lg-6">
-		<section id="form" class="form">
+		<section id="form" class="form pt-3">
 			<form action="/users/create" method="POST" class="php-email-form">
 				<div class="row">
 					<div class="col-md-6 form-group">
@@ -9,11 +9,17 @@
 						<input type="text" name="lastName" class="form-control my-3"  placeholder="Last Name" required="">
 						<input type="text" name="email" class="form-control my-3"  placeholder="Email" required="">
 						<input type="password" name="password" class="form-control my-3"  placeholder="Password" required="">
-						<input type="number" name="zipCode" class="form-control my-3" placeholder="Zipcode" required="">
-					    <input type="checkbox" class="form-check-input" value="dogs">Dogs
-					    <input type="checkbox" class="form-check-input" value="cats">Cats
-					    <input type="checkbox" class="form-check-input" value="birds">Birds
-						<input type="checkbox" class="form-check-input" value="fish">Fish
+						<p><b>What are your favorite pets?</b></p>
+						<div class="custom-control custom-checkbox mb-4">
+							<input type="checkbox" class="custom-control-input" name="dogs" id="dogCheck">
+							<label class="custom-control-label" for="dogCheck">Dogs &nbsp;</label>
+							<input type="checkbox" class="custom-control-input" name="cats" id="catCheck">
+							<label class="custom-control-label" for="catCheck">Cats &nbsp;</label>
+							<input type="checkbox" class="custom-control-input" name="birds" id="birdCheck">
+							<label class="custom-control-label" for="birdCheck">Birds &nbsp;</label>
+							<input type="checkbox" class="custom-control-input" name="fish" id="fishCheck">
+							<label class="custom-control-label" for="fishCheck">Fish &nbsp;</label>
+						</div>
 						<p>Already have an account? <a href="/users/login">log in here</a></p>
 						<div class="text-center my-3"><button name="submit" type="submit">Sign Up</button></div>
 					</div>

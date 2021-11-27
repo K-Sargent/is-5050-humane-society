@@ -6,7 +6,7 @@
 
 	<nav id="navbar" class="navbar order-last order-lg-0">
 	  <ul>
-		<li><a class="active" href="/index">Home</a></li>
+		<li><a href="/index">Home</a></li>
 		<li><a href="/pets">Pets</a></li>
 		<li><a href="/donate">Donate</a></li>
 
@@ -20,6 +20,9 @@
 		  </ul>
 		</li>
 		<li><a href="/about/contact-us">Contact</a></li>
+		<% if (loggedIn) { %>
+			<li><a href="/users/account">My Account</a></li>
+		<% } %>
 	  </ul>
 	  <i class="bi bi-list mobile-nav-toggle"></i>
 	</nav><!-- .navbar -->

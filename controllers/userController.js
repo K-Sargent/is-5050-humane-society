@@ -7,19 +7,19 @@ getUserParams = body => {
 		firstName: body.firstName,
 		lastName: body.lastName,
 		email: body.email,
-		zipCode: body.zipCode
+		donations: 0
 	};
 };
 
 module.exports = {
+	resAccount: (req, res) => {
+		res.render("users/account");
+	},
 	resLogin: (req, res) => {
 		res.render("users/login");
 	},
 	resSignup: (req, res) => {
 		res.render("users/signup");
-	},
-	resAccount: (req, res) => {
-		res.render("users/account");
 	},
 	index: (req, res, next) => {
 		User.find()
@@ -70,9 +70,6 @@ module.exports = {
 			next(error);
 		});
 	},
-	showView: (req, res) => {
-		res.render("users/show");
-	},
 	edit: (req, res, next) => {
 		let userId = req.params.id;
 		User.findById(userId)
@@ -93,7 +90,6 @@ module.exports = {
 			lastName: req.body.lastName,
 			email: req.body.email,
 			password: req.body.password,
-			zipCode: req.body.zipCode
 		};
 		User.findByIdAndUpdate(userId, {
 			$set: userParams
@@ -137,10 +133,6 @@ module.exports = {
 			all_lowercase: true
 		}).trim().run(req);
 		await check("email", "Email is invalid").isEmail().run(req);
-		await check("zipCode", "Zip code is invalid").notEmpty().isInt().isLength({
-			min: 5,
-			max: 5
-		}).equals(req.body.zipCode).run(req);
 		await check("password", "Password cannot be empty").notEmpty().run(req);
 
 		const error = validationResult(req);
@@ -164,10 +156,11 @@ module.exports = {
 
 	submitDonation: (req, res, next) => {
 		let userId = req.params.id;
-
-		User.findById(userId)
-		.then(user => {
-			user.donations = user.donations + req.body.amount;
+		User.findByIdAndUpdate(userId, {
+			$inc: { donations: Number(req.body.amount) }
+		})
+		.then(() => {
+			res.locals.redirect = "/users/account";
 			next();
 		})
 		.catch(error => {
