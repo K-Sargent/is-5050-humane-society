@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/K-Sargent/is-5050-humane-society.git"
+    "url": "git+https://github.com/K-Sargent/is-5050-shelter.git"
   },
   "author": "Kate S and Jonas W-G",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/K-Sargent/is-5050-humane-society/issues"
+    "url": "https://github.com/K-Sargent/is-5050-shelter/issues"
   },
-  "homepage": "https://github.com/K-Sargent/is-5050-humane-society#readme",
+  "homepage": "https://github.com/K-Sargent/is-5050-shelter#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "bs4-toast": "^1.2.0",
