@@ -15,6 +15,6 @@ const mongoose = require("mongoose"),
 	image: String
   });
 
-  petSchema.virtual("shortDescription").get(function () {return this.description.split(" ").slice(0, 11).join(" ") + "..."});
+  petSchema.virtual("shortDescription").get(function () {return this.description.split(" ").slice(0, 20).join(" ") + "..."});
 
 module.exports = mongoose.model("Pet", petSchema);
