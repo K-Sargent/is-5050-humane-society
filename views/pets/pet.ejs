@@ -13,7 +13,13 @@
 				<p><strong>Weight:</strong> <%= pet.weight %>lbs</p>
 				<p><strong>Adoption Price:</strong> $<%= pet.price %></p>
 				<p><strong>Description:</strong> <%= pet.description %></p>
-				<a href="/pet/adopt/<%= pet.id %>" class="btn">Adopt <%= pet.name %></a>
+				<% if (loggedIn) { %>
+					<form action="/pets/adopt/<%= pet.id %>/<%= currentUser._id %>" method="POST">
+						<button class="btn" name="submit" type="submit">Adopt <%= pet.name %></button>
+					</form>
+				<% } else { %>
+					<p>Please <a href="/users/login">Log In</a> to adopt this pet.</p>
+				<% } %>
 			</div>
 		</div>
 	</div>

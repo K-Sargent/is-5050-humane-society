@@ -1,5 +1,32 @@
 <h1>User Account</h1>
 <p>Name: <%= currentUser.firstName %> <%= currentUser.lastName %></p>
 <p>Email Address: <%= currentUser.email %></p>
-<p>Pet Preference: <%= currentUser.petPreference %></p>
 <p>Donations: $<%= currentUser.donations || 0 %></p>
+<section id="popular-courses" class="courses">
+	<div class="container">
+		<h2>Adopted Pets</h2>
+		<div class="row">
+			<% pets.forEach(pet => { %>
+				<div class="col-lg-4 col-md-6 d-flex align-items-between">
+					<div class="course-item">
+						<a class="" href="/pets/<%= pet.id %>">
+						<img src="<%= pet.image %>" class="img-fluid pet-card-img">
+						<div class="course-content">
+							<div class="d-flex justify-content-between align-items-center mb-0">
+								<h2><strong><%= pet.name %></strong></h2>
+								<p class="price">$<%= pet.price %></p>
+							</div>
+							<p><small><strong><%= pet.age %> year old <%= pet.gender %> <%= pet.breed %></strong></small></p>
+							<p><%= pet.shortDescription %></p>
+							<span class="badge badge-info bg-secondary"><%= pet.species %></span>
+							<% if(pet.houseTrained) { %>
+								<span class="badge badge-info bg-primary">Housetrained</span>
+							<% } %>
+						</div>
+						</a>
+					</div>
+				</div>
+			<% }); %>
+		</div>
+	</div>
+</section>

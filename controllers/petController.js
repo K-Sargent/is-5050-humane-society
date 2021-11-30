@@ -1,10 +1,12 @@
 "use strict";
 
 const Pet = require("../models/pet");
+const User = require("../models/user");
 
 module.exports = {
 	index: (req, res, next) => {
 		let sortParam = req.query.sortby || "dateAdded";
+		req.query.adopted = false;
 		Pet.find(req.query).sort(sortParam).then(pets => {
 			res.locals.pets = pets;
 			next();
@@ -16,6 +18,38 @@ module.exports = {
 
 	indexView: (req, res) => {
 		res.render("pets/index");
+	},
+
+	getUserPets: (req, res, next) => {
+		Pet.find({ _id: { $in: res.locals.currentUser.adoptions }}).then((pets) => {
+			res.locals.pets = pets;
+			next();
+		}).catch((error) => {
+			next(error);
+		})
+	},
+
+	adopt: (req, res, next) => {
+		let petId = req.params.petId;
+		let userId = req.params.userId;
+		Pet.findByIdAndUpdate(petId, {
+			$set: { adopted: true }
+		}).then(() => {
+			User.updateOne({ _id: userId }, { $push: { adoptions: petId }}).then(() => {
+				res.locals.redirect = "/pets/adopted";
+				next();
+			}).catch(error => {
+				console.log(`Error fetching user by ID: ${error.message}`);
+				next(error);
+			});
+		}).catch(error => {
+			console.log(`Error fetching pet by ID: ${error.message}`);
+			next(error);
+		});
+	},
+
+	adopted: (req, res) => {
+		res.render("pets/adopted");
 	},
 
 	getAllPets: (req, res) => {
@@ -153,6 +187,4 @@ module.exports = {
 			next();
 		});
 	}
-
-	// TODO: image upload function
 };

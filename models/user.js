@@ -12,10 +12,9 @@ passportLocalMongoose = require("passport-local-mongoose"),
         unique: true
 	},
 	priviledged: Boolean,
-	petPreference: [String],
-	posts: [mongoose.Schema.Types.ObjectId],
 	zipCode: Number,
-	donations: Number
+	donations: Number,
+	adoptions: [mongoose.Schema.Types.ObjectId]
   });
 
   userSchema.plugin(passportLocalMongoose, {
