@@ -1,7 +1,7 @@
 {
-  "name": "is-5050-humane-society",
+  "name": "is-5050-shelter",
   "version": "1.0.0",
-  "description": "project site for a humane society",
+  "description": "project site for an animal shelter",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
