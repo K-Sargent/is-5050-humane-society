@@ -168,5 +168,21 @@ module.exports = {
 			console.log(`Error fetching user by ID: ${error.message}`);
 			next(error);
 		});
-	}
+	},
+
+	checkAdminLoggedIn: (req, res, next) => {
+		let auth = req.isAuthenticated();
+		if (req.isAuthenticated()) {
+			if (req.user.admin) {
+				// user is logged in and is admin
+				next();
+			} else {
+				// user is logged in and not an admin
+				res.redirect("/index");
+			}
+		} else {
+			// user is not logged in
+			res.redirect("/users/login");
+		}
+	},
 };
