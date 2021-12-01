@@ -6,8 +6,9 @@ const port = 3000,
 	expressSession = require("express-session"),
 	cookieParser = require("cookie-parser"),
 	connectFlash = require("connect-flash"),
-    expressValidator = require("express-validator"),
-    passport = require("passport"),
+  expressValidator = require("express-validator"),
+  passport = require("passport"),
+  fileUpload = require("express-fileupload"),
 	homeController = require("./controllers/homecontroller"),
 	errorController = require("./controllers/errorController"),
 	petController = require("./controllers/petController"),
@@ -41,6 +42,7 @@ app.use(
   })
 );
 
+app.use(fileUpload());
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(User.createStrategy());
