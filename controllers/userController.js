@@ -7,7 +7,8 @@ getUserParams = body => {
 		firstName: body.firstName,
 		lastName: body.lastName,
 		email: body.email,
-		donations: 0
+		donations: 0,
+		admin: false
 	};
 };
 
