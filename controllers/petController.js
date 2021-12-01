@@ -2,6 +2,7 @@
 
 const Pet = require("../models/pet");
 const User = require("../models/user");
+const { resSignup } = require("./userController");
 
 module.exports = {
 	index: (req, res, next) => {
@@ -103,13 +104,29 @@ module.exports = {
 		  	dateAdded: new Date(),
 		  	description: req.body.description,
 		  	houseTrained: req.body.houseTrained,
-		  	image: req.body.image
+		  	image: "/images/pet-photos/" + req.files.image.name,  // changed this
+			adopted: false,  // added this
 		};
-
 		Pet.create(petParams).then(pet => {
-			res.locals.redirect = "/pets";
-			res.locals.pet = pet;
-			next();
+			// handle file upload
+			let sampleFile;
+			let uploadPath;
+
+			if (!req.files || Object.keys(req.files).length === 0) {
+				return res.status(400).send('No files were uploaded.');
+			}
+
+			sampleFile = req.files.image;
+			uploadPath = __dirname + "/../public/images/pet-photos/" + sampleFile.name;
+
+			sampleFile.mv(uploadPath, function(err) {
+				if (err) {
+					return res.status(500).send(err);
+				}
+				res.locals.redirect = "/pets";
+				res.locals.pet = pet;
+				next();
+			});
 		}).catch(error => {
 			console.log(`Error saving pet: ${error.message}`);
 			next(error);
