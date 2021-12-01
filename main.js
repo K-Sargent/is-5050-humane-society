@@ -1,5 +1,4 @@
-const port = 3000,
-	express = require("express"),
+const express = require("express"),
 	app = express(),
 	router = require("./routes/index"),
 	methodOverride = require("method-override"),
@@ -18,7 +17,8 @@ const port = 3000,
 	User = require("./models/user");
 
 // DATABASE CONNECTION
-mongoose.connect("mongodb+srv://dbAdmin:adminPassword@is-5050-shelter.srhwi.mongodb.net/shelter?retryWrites=true&w=majority");
+mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://dbAdmin:adminPassword@is-5050-shelter.srhwi.mongodb.net/shelter?retryWrites=true&w=majority", {useNewUrlParser: true})
+
 const db = mongoose.connection;
 db.once("open", () => {
   console.log("Successfully connected to MongoDB using Mongoose!");
@@ -63,4 +63,7 @@ app.use(express.static("public"));
 app.use(homeController.logRequestPaths);
 app.use("/", router);
 
-app.listen(port, () => {console.log(`Server running on port ${port}`)});
+app.set("port", process.env.PORT || 3000);
+const server = app.listen(app.get("port"), () => {
+  console.log(`Server running at http://localhost: ${app.get("port")}`);
+});
