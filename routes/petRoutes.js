@@ -8,6 +8,8 @@ router.get("", petController.index, petController.indexView);
 router.get("/", petController.index, petController.indexView);
 router.get("/index", petController.index, petController.indexView);
 
+router.post("/filter", petController.applyFilters);
+
 router.get("/add-pet", userController.checkAdminLoggedIn, petController.new);
 router.post("/postPet", userController.checkAdminLoggedIn, petController.create, petController.redirectView);
 router.post("/adopt/:petId/:userId", petController.adopt, petController.redirectView);

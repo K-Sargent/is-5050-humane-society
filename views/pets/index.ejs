@@ -1,8 +1,49 @@
+<section id="pets" class="my-0 py-0">
+	<div class="container my-0 py-0">
+		<h1>Listed Pets <% if (loggedIn && currentUser.admin) { %><a class="btn" href="/pets/add-pet"><i class="fas fa-plus"></i> Add Pet</a><% } %></h1>
 
-<h1>Listed Pets</h1>
-<a class="btn" href="/pets/add-pet"><i class="fas fa-plus"></i> Add Pet</a>
 
-<section id="popular-courses" class="courses">
+		<div class="d-flex align-items-center mt-5"><div class="mx-4"><button class="btn" type="button" data-toggle="collapse" data-target="#filters" aria-expanded="false" aria-controls="filters">Filter Pets</button></div><a href="/pets"> Clear Filters</a></div>
+
+		<div class="collapse m-4" id="filters">
+		  <div class="section-bg p-4">
+			  <form action="/pets/filter" method="POST" class="php-email-form">
+  				<div class="row">
+  					<div class="col-md-4 form-group my-1">
+  						<input type="text" name="name" class="form-control" id="name" placeholder="Name" >
+  					</div>
+  					<div class="col-md-4 form-group my-1">
+  						<select name="species" class="form-control py-2" id="species" >
+  							<option>Species</option>
+  							<option value="bird">Bird</option>
+  							<option value="cat">Cat</option>
+  							<option value="dog">Dog</option>
+  							<option value="fish">Fish</option>
+  						</select>
+  					</div>
+  					<div class="col-md-4 form-group my-1">
+  						<input type="text" name="breed" class="form-control" id="breed" placeholder="Breed" >
+  					</div>
+  					<div class="col-md-4 form-group my-1">
+  						<input type="radio" id="housetrained" name="houseTrained" value="true">
+  						<label for="housetrained">Housetrained</label>
+						<br />
+						<input type="radio" id="female" name="gender" value="female">
+  						<label for="female">Female</label>
+						<br />
+						<input type="radio" id="male" name="gender" value="male">
+  						<label for="male">Male</label>
+  					</div>
+  				</div>
+  				<div class="text-center mt-3"><button class="btn" type="submit">Apply Filters</button></div>
+  			</form>
+		  </div>
+		</div>
+
+	</div>
+</section>
+
+<section id="pets" class="courses">
 	<div class="container"  data-aos="fade-up">
 		<div class="row">
 			<% if (!pets.length > 0) { %>

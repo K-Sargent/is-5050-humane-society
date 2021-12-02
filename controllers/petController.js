@@ -2,6 +2,7 @@
 
 const Pet = require("../models/pet");
 const User = require("../models/user");
+const url = require("url")
 const { resSignup } = require("./userController");
 
 module.exports = {
@@ -19,6 +20,20 @@ module.exports = {
 
 	indexView: (req, res) => {
 		res.render("pets/index");
+	},
+
+	applyFilters: (req, res) => {
+		let filters = {};
+		if (req.body.name != "") filters.name = req.body.name;
+		if (req.body.breed != "") filters.breed = req.body.breed;
+		if (req.body.species != "Species") filters.species = req.body.species;
+		if (req.body.houseTrained) filters.houseTrained = req.body.houseTrained;
+		if (req.body.gender) filters.gender = req.body.gender;
+		console.log(filters);
+		res.redirect(url.format({
+			pathname: "/pets",
+			query: filters
+		}));
 	},
 
 	getUserPets: (req, res, next) => {
