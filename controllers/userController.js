@@ -1,5 +1,6 @@
 "use strict";
 const {check, validationResult} = require("express-validator");
+const stripe = require('stripe')('sk_test_51K4s8wFA32Our4rGnBuMj6IdR9hXdSutDTMbUwGpU7MlzPgK6eCdoJx8XkbXLDV48juo6dcde64hhN1jf3IhUCb500SPNl1H9R');
 const User = require("../models/user"),
 passport = require("passport"),
 getUserParams = body => {
@@ -154,6 +155,37 @@ module.exports = {
 		res.locals.redirect = "/";
 		next();
 	},
+	
+	// Different sized donations
+	// or different quantity amount
+	//
+	//
+	// see lab in class exercise 1 for extra help
+	stripeDonation: async (req, res, next) => {
+		let stripeLineItems = [];
+		stripeLineItems.push({
+			price_data: {
+				currency: 'usd',
+				product_data: {
+					name: "donation"
+				},
+				unit_amount: 100,  // in cents, so this is 1 dollar
+			},
+			quantity: 1,
+		});
+
+		const stripseSession = await stripe.checkout.sessions.create({
+			payment_method_types: ['card'],  // Credit card payments accepted
+            client_reference_id: "donation string",  // Store the local orderId on Stripe as a reference
+            customer_email: req.user.email,  // Store user email
+            line_items: stripeLineItems,  // Order line items
+            mode: 'payment',  // One-time payment
+            success_url: `${req.headers.origin}/users/account`, // Redirect Url for success.  Pass sessionID in querystring
+            cancel_url: `${req.headers.origin}/index`, // Redirect Url for cancel
+		});
+
+		res.json({ id: stripeSession.id });
+	},
 
 	submitDonation: (req, res, next) => {
 		let userId = req.params.id;
@@ -161,7 +193,7 @@ module.exports = {
 			$inc: { donations: Number(req.body.amount) }
 		})
 		.then(() => {
-			res.locals.redirect = "/users/account";
+			//res.locals.redirect = "/users/account";
 			next();
 		})
 		.catch(error => {
