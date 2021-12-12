@@ -155,7 +155,7 @@ module.exports = {
 		res.locals.redirect = "/";
 		next();
 	},
-	
+
 	// Different sized donations
 	// or different quantity amount
 	//
@@ -214,6 +214,14 @@ module.exports = {
 			}
 		} else {
 			// user is not logged in
+			res.redirect("/users/login");
+		}
+	},
+	checkLoggedIn: (req, res, next) => {
+		let auth = req.isAuthenticated();
+		if (req.isAuthenticated()) {
+			next();
+		} else {
 			res.redirect("/users/login");
 		}
 	},
