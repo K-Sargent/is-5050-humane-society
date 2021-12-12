@@ -1,6 +1,7 @@
 <h1>Shelter News</h1>
-<a class="btn mt-4" href="/news/add-news"><i class="fas fa-plus"></i>Create News</a>
-
+<% if (loggedIn && user.admin) { %>
+	<a class="btn mt-4" href="/news/add-news"><i class="fas fa-plus"></i> New Article</a>
+<% } %>
 <section id="popular-courses" class="courses">
 	<div class="container">
 		<div class="row">

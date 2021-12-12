@@ -13,7 +13,7 @@ module.exports = {
 		res.render("about/contact-us");
 	},
 	resThanks: (req, res) => {
-		res.render("about/contact-thanks");
+		res.render("contact-thanks");
 	},
 	submitContact: (req, res) => {
 		res.redirect("contact-thanks");

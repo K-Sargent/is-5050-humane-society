@@ -1,4 +1,4 @@
-<h1>Posted by <%= discussion.author %>, on <%= discussion.datePosted.toDateString() %></h1>
+<h1>Posted by <%= discussion.author.firstName %> <%= discussion.author.lastName %>, on <%= discussion.datePosted.toDateString() %></h1>
 
 <p class="lead"><%= discussion.description %></p>
 
@@ -10,7 +10,6 @@
 				<div class="col-lg-6">
 		    <form action="/discussions/<%= discussion._id %>/postComment" method="POST" class="php-email-form">
 		        <input type="text" name="comment" class="form-control" id="comment" placeholder="Leave a comment here" required="">
-		        <input type="hidden" id="author" name="author" value="<%= currentUser.firstName %> <%= currentUser.lastName %>">
 		        <button class="btn my-3" name="submit" type="submit">Post Reply</button>
 		    </form>
 		</div>
@@ -25,7 +24,7 @@
 				<div class="card my-3 shadow-sm">
 					<div class="card-body">
 						<div class="section-title mt-3 pb-0 mb-1">
-							<h2>Reply by <%= discussion.author %> on <%= discussion.datePosted.toDateString() %></h2>
+							<h2>Reply by <%= comment.author.firstName %> <%= comment.author.lastName %>on <%= comment.date.toDateString() %></h2>
 						</div>
 						<p class="mt-3 mb-2"><%= comment.data %></p>
 					</div>
