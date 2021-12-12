@@ -14,7 +14,7 @@ const router = require("express").Router(),
 	router.get("/signup", userController.resSignup);
 	router.post("/login/authenticate", userController.authenticate, userController.redirectView);
 	router.get("/logout", userController.logout, userController.redirectView);
-	router.post("/submit-donation/:id", userController.submitDonation, userController.redirectView);
+	router.post("/submit-donation/:id", userController.submitDonation, userController.stripeDonation);
 	router.get("/account", petController.getUserPets, userController.resAccount);
 
 module.exports = router;
