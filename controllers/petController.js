@@ -218,5 +218,15 @@ module.exports = {
 			console.log(`Error deleting pet by ID: ${error.message}`);
 			next();
 		});
-	}
+	},
+
+	//api route
+	api: (req, res, next) => {
+		Pet.find({}).then(pets => {
+			res.json(pets);
+		}).catch(error => {
+			console.log(`Error creating pets api: ${error.message}`);
+			next(error);
+		});
+	},
 };
