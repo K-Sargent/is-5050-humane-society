@@ -174,7 +174,7 @@ module.exports = {
 			quantity: 1,
 		});
 
-		const stripseSession = await stripe.checkout.sessions.create({
+		const stripeSession = await stripe.checkout.sessions.create({
 			payment_method_types: ['card'],  // Credit card payments accepted
             client_reference_id: "donation string",  // Store the local orderId on Stripe as a reference
             customer_email: req.user.email,  // Store user email
@@ -184,7 +184,8 @@ module.exports = {
             cancel_url: `${req.headers.origin}/index`, // Redirect Url for cancel
 		});
 
-		res.json({ id: stripeSession.id });
+		//console.log(stripeSession);
+		res.redirect(stripeSession.success_url);
 	},
 
 	submitDonation: (req, res, next) => {
